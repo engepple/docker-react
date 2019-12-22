@@ -1,0 +1,14 @@
+# lection 91 hint: add this language command to avoid error "rakefile not found"
+language: generic
+
+# tell travis, what to do with our code:
+sudo: required
+services:
+  - docker
+  
+before_install:
+  - docker build -t engepple/docker-react -f Dockerfile.dev .
+
+# lection 91 hint: change docker run command like below (not -- --coverage)
+script:
+  - docker run -e CI=true engepple/docker-react npm run test
