@@ -12,3 +12,17 @@ before_install:
 # lection 91 hint: change docker run command like below (not -- --coverage)
 script:
   - docker run -e CI=true engepple/docker-react npm run test
+  
+deploy:
+  # edge = true is needed due to hint lecture 97
+  edge: true
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-074329460040"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
